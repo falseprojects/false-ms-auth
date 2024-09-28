@@ -29,6 +29,9 @@ importers:
       bcryptjs:
         specifier: ^2.4.3
         version: 2.4.3
+      false-lib-rbac:
+        specifier: git+https://github.com/falseprojects/false-lib-rbac.git
+        version: git+https://git@github.com:falseprojects/false-lib-rbac.git#e9faf615e2d99fa3642c2ec9934295dc039130ff
       fastify:
         specifier: ^4.28.1
         version: 4.28.1
@@ -71,6 +74,9 @@ importers:
         version: 5.5.4
 
 packages:
+
+  '@casl/ability@6.7.1':
+    resolution: {integrity: sha512-e+Vgrehd1/lzOSwSqKHtmJ6kmIuZbGBlM2LBS5IuYGGKmVHuhUuyh3XgTn1VIw9+TO4gqU+uptvxfIRBUEdJuw==}
 
   '@esbuild/aix-ppc64@0.23.1':
     resolution: {integrity: sha512-6VhYk1diRqrhBAqpJEdjASR/+WVRtfjpqKuNw11cLiaWpAT/Uu+nokB+UJnevzy/P9C/ty6AOe0dwueMrGh/iQ==}
@@ -342,6 +348,18 @@ packages:
   '@types/node@20.16.2':
     resolution: {integrity: sha512-91s/n4qUPV/wg8eE9KHYW1kouTfDk2FPGjXbBMfRWP/2vg1rCXNQL1OCabwGs0XSdukuK+MwCDXE30QpSeMUhQ==}
 
+  '@ucast/core@1.10.2':
+    resolution: {integrity: sha512-ons5CwXZ/51wrUPfoduC+cO7AS1/wRb0ybpQJ9RrssossDxVy4t49QxWoWgfBDvVKsz9VXzBk9z0wqTdZ+Cq8g==}
+
+  '@ucast/js@3.0.4':
+    resolution: {integrity: sha512-TgG1aIaCMdcaEyckOZKQozn1hazE0w90SVdlpIJ/er8xVumE11gYAtSbw/LBeUnA4fFnFWTcw3t6reqseeH/4Q==}
+
+  '@ucast/mongo2js@1.3.4':
+    resolution: {integrity: sha512-ahazOr1HtelA5AC1KZ9x0UwPMqqimvfmtSm/PRRSeKKeE5G2SCqTgwiNzO7i9jS8zA3dzXpKVPpXMkcYLnyItA==}
+
+  '@ucast/mongo@2.4.3':
+    resolution: {integrity: sha512-XcI8LclrHWP83H+7H2anGCEeDq0n+12FU2mXCTz6/Tva9/9ddK/iacvvhCyW6cijAAOILmt0tWplRyRhVyZLsA==}
+
   abort-controller@3.0.0:
     resolution: {integrity: sha512-h8lQ8tacZYnR3vNQTgibj+tODHI5/+l06Au2Pcriv/Gmet0eaj4TwWH41sO9wnHDiQsEj19q0drzdWdeAHtweg==}
     engines: {node: '>=6.5'}
@@ -574,6 +592,10 @@ packages:
   events@3.3.0:
     resolution: {integrity: sha512-mQw+2fkQbALzQ7V0MY0IqdnXNOeTtP4r0lN9z7AAawCXgqea7bDii20AYrIBrFd/Hx0M2Ocz6S111CaFkUcb0Q==}
     engines: {node: '>=0.8.x'}
+
+  false-lib-rbac@git+https://git@github.com:falseprojects/false-lib-rbac.git#e9faf615e2d99fa3642c2ec9934295dc039130ff:
+    resolution: {commit: e9faf615e2d99fa3642c2ec9934295dc039130ff, repo: git@github.com:falseprojects/false-lib-rbac.git, type: git}
+    version: 1.0.0
 
   fast-content-type-parse@1.1.0:
     resolution: {integrity: sha512-fBHHqSTFLVnR61C+gltJuE5GkVQMV0S2nqUO8TJ+5Z3qAKG8vAx4FKai1s5jq/inV1+sREynIWSuQ6HgoSXpDQ==}
@@ -1098,6 +1120,10 @@ packages:
 
 snapshots:
 
+  '@casl/ability@6.7.1':
+    dependencies:
+      '@ucast/mongo2js': 1.3.4
+
   '@esbuild/aix-ppc64@0.23.1':
     optional: true
 
@@ -1331,6 +1357,22 @@ snapshots:
   '@types/node@20.16.2':
     dependencies:
       undici-types: 6.19.8
+
+  '@ucast/core@1.10.2': {}
+
+  '@ucast/js@3.0.4':
+    dependencies:
+      '@ucast/core': 1.10.2
+
+  '@ucast/mongo2js@1.3.4':
+    dependencies:
+      '@ucast/core': 1.10.2
+      '@ucast/js': 3.0.4
+      '@ucast/mongo': 2.4.3
+
+  '@ucast/mongo@2.4.3':
+    dependencies:
+      '@ucast/core': 1.10.2
 
   abort-controller@3.0.0:
     dependencies:
@@ -1574,6 +1616,10 @@ snapshots:
   event-target-shim@5.0.1: {}
 
   events@3.3.0: {}
+
+  false-lib-rbac@git+https://git@github.com:falseprojects/false-lib-rbac.git#e9faf615e2d99fa3642c2ec9934295dc039130ff:
+    dependencies:
+      '@casl/ability': 6.7.1
 
   fast-content-type-parse@1.1.0: {}
 
