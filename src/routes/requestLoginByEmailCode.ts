@@ -1,14 +1,12 @@
-import { compare, hash } from 'bcryptjs';
 import { FastifyInstance } from 'fastify';
 import { ZodTypeProvider } from 'fastify-type-provider-zod';
 import { z } from 'zod';
 import { BadRequestError } from './errors/badRequestError';
-import { UnauthorizedError } from './errors/unauthorized-error';
 import { userApi } from '../lib/axios';
 import { sendEmail } from '../services/emailHandler';
 import redisClient from '../lib/redis';
 
-export async function sendCodeEmail(app: FastifyInstance) {
+export async function requestLoginByEmailCode(app: FastifyInstance) {
   app.withTypeProvider<ZodTypeProvider>().post('/auth/login/sendCodeEmail', {
     schema: {
       tags: ['auth'],

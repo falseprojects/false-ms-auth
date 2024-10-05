@@ -6,5 +6,7 @@ declare namespace NodeJS {
     REDIS_URL: string;
     EMAIL: string;
     EMAIL_PASSWORD: string;
+    FRONTEND_PATH_VERIFY_EMAIL: string;
+    FRONTEND_PATH_CHANGE_PASSWORD: string;
   }
 }
