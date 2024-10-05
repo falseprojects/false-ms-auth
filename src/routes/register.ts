@@ -2,7 +2,7 @@ import { FastifyInstance } from 'fastify';
 import { z } from 'zod';
 import { ZodTypeProvider } from 'fastify-type-provider-zod';
 import { hash } from 'bcryptjs';
-import { userApi } from '../http/axios';
+import { userApi } from '../lib/axios';
 import { BadRequestError } from './errors/badRequestError';
 
 export async function register(app: FastifyInstance) {

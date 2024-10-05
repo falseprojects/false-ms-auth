@@ -4,7 +4,7 @@ import { ZodTypeProvider } from 'fastify-type-provider-zod';
 import { z } from 'zod';
 import { BadRequestError } from './errors/badRequestError';
 import { UnauthorizedError } from './errors/unauthorized-error';
-import { userApi } from '../http/axios';
+import { userApi } from '../lib/axios';
 
 export async function login(app: FastifyInstance) {
   app.withTypeProvider<ZodTypeProvider>().post('/auth/login', {
