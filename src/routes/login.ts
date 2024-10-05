@@ -4,12 +4,13 @@ import { ZodTypeProvider } from 'fastify-type-provider-zod';
 import { z } from 'zod';
 import { BadRequestError } from './errors/badRequestError';
 import { UnauthorizedError } from './errors/unauthorized-error';
+import { userApi } from '../http/axios';
 
 export async function login(app: FastifyInstance) {
   app.withTypeProvider<ZodTypeProvider>().post('/auth/login', {
     schema: {
       tags: ['auth'],
-      summary: 'Login',
+      summary: 'Login by email and password',
       body: z.object({
         email: z.string().email(),
         password: z.string(),
@@ -24,39 +25,38 @@ export async function login(app: FastifyInstance) {
       },
     },
     handler: async (request, reply) => {
-      const userDb = {
-        id: 1,
-        role: 'customer',
-        email: 'lucascv8525@gmail.com',
-        password: '123',
-      };
-
-      const hashed = await hash(userDb.password, 6);
       const { email, password } = request.body;
 
-      if (!userDb) {
-        throw new BadRequestError('User does not exist');
-      }
-      //Desse usuário preciso da senha hashed.
+      try {
+        const user = await userApi.post('/user/getByEmail', { email: email });
 
-      const isPasswordOk = await compare(password, hashed);
-
-      if (!isPasswordOk) {
-        throw new UnauthorizedError('Password id not correct');
-      }
-
-      const token = await reply.jwtSign(
-        {
-          sub: { id: userDb.id, role: userDb.role, email: userDb.email },
-        },
-        {
-          sign: {
-            expiresIn: '3d',
-          },
+        if (user.status === 400) {
+          throw new BadRequestError('User does not exist');
         }
-      );
 
-      return reply.status(201).send({ token });
+        const isPasswordOk = await compare(password, user.data.password_hash);
+
+        if (!isPasswordOk) {
+          throw new UnauthorizedError('Password id not correct');
+        }
+
+        const token = await reply.jwtSign(
+          {
+            sub: { id: user.data.user_id, email: user.data.email },
+          },
+          {
+            sign: {
+              expiresIn: '3d',
+            },
+          }
+        );
+
+        return reply.status(201).send({ token });
+      } catch (error) {
+        if (error instanceof Error) {
+          console.log(error);
+        }
+      }
     },
   });
 }

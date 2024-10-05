@@ -2,6 +2,8 @@ import { FastifyInstance } from 'fastify';
 import { z } from 'zod';
 import { ZodTypeProvider } from 'fastify-type-provider-zod';
 import { hash } from 'bcryptjs';
+import { userApi } from '../http/axios';
+import { BadRequestError } from './errors/badRequestError';
 
 export async function register(app: FastifyInstance) {
   app.withTypeProvider<ZodTypeProvider>().post('/auth/register', {
@@ -9,7 +11,6 @@ export async function register(app: FastifyInstance) {
       tags: ['auth'],
       summary: 'Register a new client',
       body: z.object({
-        name: z.string(),
         password: z.string(),
         email: z.string().email(),
       }),
@@ -23,17 +24,25 @@ export async function register(app: FastifyInstance) {
       },
     },
     handler: async (request, reply) => {
-      const { name, password, email } = request.body;
+      const { password, email } = request.body;
 
-      //Buscar o usuário pelo email pra ver se ele já existe.
-      //Caso o usuário existir, retornar um erro.
+      try {
+        const passwordHash = await hash(password, 6);
 
-      //Fazer o encrypt da senha
-      const passwordHash = await hash(password, 6);
+        const createdUser = await userApi.post('/user/create', {
+          email: email,
+          password_hash: passwordHash,
+        });
 
-      //Fazer a chamada da api de usuários para realizar a criação do usuário.
-
-      //Aguardar a resposta da api de usuarios e confirmar o registro.
+        if (createdUser.status === 400) {
+          throw new BadRequestError('Error trying to create user');
+        }
+        return reply.status(200).send();
+      } catch (error) {
+        if (error instanceof Error) {
+          console.log(error.message);
+        }
+      }
     },
   });
 }
