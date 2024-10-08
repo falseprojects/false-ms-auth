@@ -14,7 +14,7 @@ export async function sendEmail(to: string, subject: string, text: string) {
 
   // Enviar o e-mail
   await transporter.sendMail({
-    from: '"lucascv8525@gmail.com" <no-reply@seuapp.com>',
+    from: process.env.EMAIL,
     to,
     subject,
     text,
