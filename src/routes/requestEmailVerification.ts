@@ -45,7 +45,7 @@ export async function requestEmailVerification(app: FastifyInstance) {
             `emailVerification:${verificationToken}`,
             user.data.user_id.toString(),
             {
-              EX: 300, // Expira em 300 segundos (5 minutos)
+              EX: 900,
             }
           );
           const frontendPath = process.env.FRONTEND_PATH_VERIFY_EMAIL;

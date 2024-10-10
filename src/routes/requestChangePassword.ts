@@ -39,7 +39,7 @@ export async function requestChangePassword(app: FastifyInstance) {
         `passwordReset:${resetToken}`,
         user.data.user_id.toString(),
         {
-          EX: 300,
+          EX: 900,
         }
       );
       const frontendPath = process.env.FRONTEND_PATH_CHANGE_PASSWORD;

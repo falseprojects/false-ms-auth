@@ -33,10 +33,9 @@ export async function requestLoginByEmailCode(app: FastifyInstance) {
       }
 
       const code = Math.floor(100000 + Math.random() * 900000).toString();
-      const expirationTimeInSeconds = 5 * 60;
 
       await redisClient.set(`loginCode:${email}`, code, {
-        EX: expirationTimeInSeconds,
+        EX: 900,
       });
 
       await sendEmail(email, 'Your login code', `Your login code is: ${code}`);
