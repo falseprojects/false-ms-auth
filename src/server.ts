@@ -11,8 +11,7 @@ import {
 } from 'fastify-type-provider-zod';
 import 'dotenv/config';
 import { errorHandler } from './routes/errors/errorHandling';
-import { login } from './routes/login';
-import { routes } from './routes/routes';
+import { routes } from './routes';
 
 const app = fastify().withTypeProvider<ZodTypeProvider>();
 
@@ -45,6 +44,7 @@ app.register(fastifySwagger, {
 app.register(fastifyJwt, {
   secret: process.env.JWT_SECRET,
 });
+
 app.register(fastifySwaggerUi, {
   routePrefix: '/docs',
 });
