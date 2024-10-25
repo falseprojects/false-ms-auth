@@ -38,6 +38,9 @@ importers:
       false-lib-rbac:
         specifier: git+https://github.com/falseprojects/false-lib-rbac.git
         version: git+https://git@github.com:falseprojects/false-lib-rbac.git#e9faf615e2d99fa3642c2ec9934295dc039130ff
+      false-ms-auth:
+        specifier: 'file:'
+        version: file:(prisma@5.19.0)
       fastify:
         specifier: ^4.28.1
         version: 4.28.1
@@ -658,6 +661,9 @@ packages:
   false-lib-rbac@git+https://git@github.com:falseprojects/false-lib-rbac.git#e9faf615e2d99fa3642c2ec9934295dc039130ff:
     resolution: {commit: e9faf615e2d99fa3642c2ec9934295dc039130ff, repo: git@github.com:falseprojects/false-lib-rbac.git, type: git}
     version: 1.0.0
+
+  'false-ms-auth@file:':
+    resolution: {directory: '', type: directory}
 
   fast-content-type-parse@1.1.0:
     resolution: {integrity: sha512-fBHHqSTFLVnR61C+gltJuE5GkVQMV0S2nqUO8TJ+5Z3qAKG8vAx4FKai1s5jq/inV1+sREynIWSuQ6HgoSXpDQ==}
@@ -1768,6 +1774,29 @@ snapshots:
   false-lib-rbac@git+https://git@github.com:falseprojects/false-lib-rbac.git#e9faf615e2d99fa3642c2ec9934295dc039130ff:
     dependencies:
       '@casl/ability': 6.7.1
+
+  false-ms-auth@file:(prisma@5.19.0):
+    dependencies:
+      '@fastify/cors': 9.0.1
+      '@fastify/jwt': 8.0.1
+      '@fastify/swagger': 8.15.0
+      '@fastify/swagger-ui': 4.1.0
+      '@prisma/client': 5.16.2(prisma@5.19.0)
+      '@types/bcryptjs': 2.4.6
+      '@types/nodemailer': 6.4.16
+      axios: 1.7.7
+      bcryptjs: 2.4.3
+      false-lib-rbac: git+https://git@github.com:falseprojects/false-lib-rbac.git#e9faf615e2d99fa3642c2ec9934295dc039130ff
+      fastify: 4.28.1
+      fastify-plugin: 4.5.1
+      fastify-type-provider-zod: 2.0.0(fastify@4.28.1)(zod@3.23.8)
+      nodemailer: 6.9.15
+      redis: 4.7.0
+      zod: 3.23.8
+    transitivePeerDependencies:
+      - debug
+      - prisma
+      - supports-color
 
   fast-content-type-parse@1.1.0: {}
 

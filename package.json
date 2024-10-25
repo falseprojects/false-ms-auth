@@ -6,7 +6,10 @@
   "scripts": {
     "dev": "pnpm tsx watch src/server.ts",
     "db:migrate": "pnpm prisma migrate dev",
-    "db:studio": "pnpm prisma studio"
+    "db:studio": "pnpm prisma studio",
+    "init": "pnpm i",
+    "build": "tsc",
+    "start": "pnpm run init && pnpm run build && node dist/server.js"
   },
   "keywords": [],
   "author": "",
@@ -22,6 +25,7 @@
     "axios": "^1.7.7",
     "bcryptjs": "^2.4.3",
     "false-lib-rbac": "git+https://github.com/falseprojects/false-lib-rbac.git",
+    "false-ms-auth": "file:",
     "fastify": "^4.28.1",
     "fastify-plugin": "^4.5.1",
     "fastify-type-provider-zod": "^2.0.0",
