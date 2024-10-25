@@ -50,6 +50,6 @@ app.register(fastifySwaggerUi, {
 });
 app.register(fastifyCors);
 app.register(routes);
-app.listen({ port: PORT }).then(() => {
+app.listen({ port: PORT || 3000, host: '0.0.0.0' }).then(() => {
   console.log('Server is running: ' + PORT);
 });
