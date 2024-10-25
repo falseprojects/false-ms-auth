@@ -9,7 +9,7 @@
     "db:studio": "pnpm prisma studio",
     "init": "pnpm i",
     "build": "tsc",
-    "start": "pnpm run init && pnpm run build && node dist/server.js"
+    "start": "pnpm run build && node dist/server.js"
   },
   "keywords": [],
   "author": "",
