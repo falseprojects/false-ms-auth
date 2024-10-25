@@ -24,7 +24,6 @@
     "@types/nodemailer": "^6.4.16",
     "axios": "^1.7.7",
     "bcryptjs": "^2.4.3",
-    "false-lib-rbac": "git+https://github.com/falseprojects/false-lib-rbac.git",
     "false-ms-auth": "file:",
     "fastify": "^4.28.1",
     "fastify-plugin": "^4.5.1",
